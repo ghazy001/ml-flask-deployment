@@ -1,90 +1,33 @@
-Here is the code for your `README.md` file in Markdown format, tailored for your Flask-based student internet access prediction project:
+Internet Access Prediction Web Application
+Overview
+This is a Flask-based web application that predicts whether a student has internet access at home based on features such as age, gender, subject, family income level, nationality, study hours per week, and LMS (Learning Management System) usage. The prediction is made using a pre-trained K-Nearest Neighbors (KNN) model, with data preprocessing handled by StandardScaler and LabelEncoder from scikit-learn. The application provides a user-friendly interface built with Bootstrap and Chart.js for visualization of prediction results.
+Features
 
-```markdown
-# 🧠 Student Internet Access Prediction App
+Input Form: Users can input student details (age, gender, subject, etc.) via a web form.
+Prediction Output: Displays whether the student has internet access ("Yes" or "No") along with the confidence probability.
+Visualization: Shows a bar chart of class probabilities (Yes/No) using Chart.js.
+Error Handling: Gracefully handles invalid inputs or missing model files with a dedicated error page.
+Responsive Design: Built with Bootstrap for a mobile-friendly user interface.
 
-This Flask web application predicts whether a student has internet access at home based on personal, academic, and socio-economic features. The prediction is powered by a pre-trained K-Nearest Neighbors (KNN) classifier and includes preprocessing steps using `scikit-learn`.
-
-## 🚀 Features
-
-- User-friendly web interface to input student data.
-- Prediction of internet access availability with probability.
-- Visual chart showing class probabilities using Chart.js.
-- Error handling and clean UI with Bootstrap 5.
-
-## 🧰 Tech Stack
-
-- **Backend**: Flask (Python)
-- **ML**: scikit-learn, joblib
-- **Frontend**: HTML, Bootstrap 5, Chart.js
-- **Data Manipulation**: pandas, numpy
-
-## 📁 Project Structure
-
-```
-
-project/
-│
-├── app.py                     # Main Flask application
-├── templates/
-│   ├── index.html             # Input form
-│   ├── result.html            # Prediction result
-│   └── error.html             # Error display
+Project Structure
 ├── models/
-│   ├── knn\_model.joblib       # Trained KNN model
-│   ├── scaler.joblib          # Scaler for numeric features
-│   ├── label\_encoders.joblib  # LabelEncoders for categorical features
-│   ├── numeric\_cols.joblib    # List of numeric columns
-│   ├── target\_encoder.joblib  # Target label encoder
-│   └── feature\_names.joblib   # Ordered list of feature names
-└── requirements.txt           # Python package dependencies
+│   ├── knn_model.joblib        # Pre-trained KNN model
+│   ├── scaler.joblib           # StandardScaler for numeric features
+│   ├── label_encoders.joblib   # LabelEncoders for categorical features
+│   ├── numeric_cols.joblib     # List of numeric columns
+│   ├── target_encoder.joblib   # LabelEncoder for target variable
+│   ├── feature_names.joblib    # List of feature names used in training
+├── templates/
+│   ├── index.html              # Home page with input form
+│   ├── result.html             # Prediction result page
+│   ├── error.html              # Error page for failed predictions
+├── app.py                      # Main Flask application
+├── requirements.txt            # Project dependencies
+└── README.md                   # This file
 
-````
+Requirements
+The project dependencies are listed in requirements.txt. The required Python packages are:
 
-## 📝 Installation
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/student-internet-prediction.git
-   cd student-internet-prediction
-````
-
-2. **Create a virtual environment (optional but recommended)**:
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install dependencies**:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Ensure pre-trained model files are in the `models/` directory**. If not, run the training script (not included in this repo).
-
-## 🧪 Run the Application
-
-```bash
-python app.py
-```
-
-Then open your browser and navigate to `http://127.0.0.1:5000`.
-
-## ✅ Example Inputs
-
-* **Age**: 16
-* **Gender**: M or F
-* **Subject**: Math, English, CS, etc.
-* **Income**: Low, Medium, High
-* **Nationality**: Tunisia, Egypt, etc.
-* **LMS usage**: Yes or No
-* **Study Hours/Week**: e.g., 5.5
-
-## 📦 Dependencies
-
-```
 pandas>=2.0.0
 numpy>=1.26.0
 scikit-learn>=1.5.0
@@ -92,25 +35,87 @@ seaborn>=0.13.0
 matplotlib>=3.8.0
 joblib>=1.4.0
 flask>=3.0.0
-```
 
-You can also install them using:
+Installation
 
-```bash
-pip install pandas numpy scikit-learn seaborn matplotlib joblib flask
-```
+Clone the repository:
+git clone <repository-url>
+cd <repository-directory>
 
-## 🧠 Model Information
 
-The app uses a pre-trained KNN model trained on student features to predict whether they have internet access at home. The model outputs probabilities and the most likely class ("Yes" or "No").
+Set up a virtual environment (optional but recommended):
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-## 📌 Notes
 
-* Make sure all required `.joblib` files are correctly saved in the `models/` directory.
-* The app includes basic error handling for unseen label values and missing inputs.
+Install dependencies:
+pip install -r requirements.txt
 
-## 📄 License
 
-This project is licensed under the MIT License. See `LICENSE` for more information.
+Ensure model files exist:
 
-```
+The application requires pre-trained model files in the models/ directory.
+If the model files are missing, run the training script (not included in this repository) to generate:
+knn_model.joblib
+scaler.joblib
+label_encoders.joblib
+numeric_cols.joblib
+target_encoder.joblib
+feature_names.joblib
+
+
+
+
+
+Usage
+
+Run the application:
+python app.py
+
+The Flask server will start in debug mode, accessible at http://127.0.0.1:5000.
+
+Access the web interface:
+
+Open a web browser and navigate to http://127.0.0.1:5000.
+Fill out the form with student details (age, gender, subject, family income level, nationality, study hours, and LMS usage).
+Submit the form to receive a prediction.
+
+
+View results:
+
+The result page (result.html) displays the prediction ("Yes" or "No") with a confidence probability and a bar chart showing class probabilities.
+If an error occurs (e.g., invalid input or missing model files), the error page (error.html) will be shown.
+
+
+
+Example Input
+
+Age: 15
+Gender: M
+Subject: Math
+Family Income Level: Medium
+Nationality: Jordan
+Study Hours per Week: 10
+LMS: Yes
+
+Notes
+
+The application assumes the model and preprocessing files are available in the models/ directory. If these files are missing, the app will display an error message in the console and fail to load.
+The categorical input options (e.g., gender, subject) are hardcoded based on the dataset used for training.
+The application uses Bootstrap 5.3.0-alpha1 and Chart.js for styling and visualization, loaded via CDN.
+The error page includes Font Awesome icons for visual feedback, also loaded via CDN.
+
+Troubleshooting
+
+Model not found error: Ensure all .joblib files are present in the models/ directory. Run the training script to generate these files if necessary.
+Invalid input error: Check that all form fields are filled correctly (e.g., age and study hours must be numeric).
+Dependency issues: Verify that all required packages are installed using the specified versions in requirements.txt.
+
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
+Acknowledgments
+
+Built with Flask, scikit-learn, and Bootstrap.
+Visualization powered by Chart.js.
+Icons provided by Font Awesome.
+
